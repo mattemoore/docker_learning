@@ -9,12 +9,10 @@ Host w/ Docker and Kubernetes installed
 $ chmod u+x delete-basic-service.sh 
 $ chmod u+x deploy-basic-service.sh 
 $ chmod u+x stress-test.sh
-```
-
-Note that different hosts provided the responses
-
-```
 $ ./deploy-basic-service.sh
 $ ./stress-test.sh
+```
+Note that different hosts provided the responses
+```
 $ ./delete-basic-service.sh
 ```
