@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic-service-deployment
+  labels:
+    app: basic-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: basic-service
+  template:
+    metadata:
+      labels:
+        app: basic-service
+    spec:
+      containers:
+      - name: basic-service
+        image: golang:alpine
+        command: ["/bin/sh"]
+        args: ["-c", "cd ~ && go run hello.go"]
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: app-code
+          mountPath: /root
+      volumes:
+      - name: app-code
+        hostPath: 
+          path: /Users/mattmoore/code/docker_learning/basic_service/src
